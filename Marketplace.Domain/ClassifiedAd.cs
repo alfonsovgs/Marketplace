@@ -6,11 +6,11 @@ namespace Marketplace.Domain
 {
     public class ClassifiedAd
     {
-        public Guid Id { get; private set; }
+        public ClassifiedAdId Id { get; private set; }
+        private UserId _ownerId;
 
-        public ClassifiedAd(Guid id, Guid ownerId)
+        public ClassifiedAd(ClassifiedAdId id, UserId ownerId)
         {
-            if(id == default) throw new ArgumentException("Identity must be specified", nameof(id));
             Id = id;
             _ownerId = ownerId;
         }
@@ -19,7 +19,6 @@ namespace Marketplace.Domain
         public void UpdateText(string text) => _text = text;
         public void UpdatePrice(decimal price) => _price = price;
 
-        private Guid _ownerId;
         private string _title;
         private string _text;
         private decimal _price;
