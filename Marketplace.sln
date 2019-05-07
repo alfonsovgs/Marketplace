@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Domain", "Marke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Tests", "Marketplace.Tests\Marketplace.Tests.csproj", "{82CFFFBC-7079-4B55-A504-774855C6DA9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Framework", "Marketplace.Framework\Marketplace.Framework.csproj", "{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{82CFFFBC-7079-4B55-A504-774855C6DA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82CFFFBC-7079-4B55-A504-774855C6DA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82CFFFBC-7079-4B55-A504-774855C6DA9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

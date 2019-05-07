@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Marketplace.Domain
+namespace Marketplace.Framework
 {
     public class Class1
     {
