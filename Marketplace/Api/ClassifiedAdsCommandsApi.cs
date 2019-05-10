@@ -6,12 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Marketplace.Api
 {
+    [ApiController]
     [Route("/ad")]
     public class ClassifiedAdsCommandsApi : Controller
     {
-        public async Task<IActionResult> Post(Contracts.ClassifiedAds.V1.Create request)
+        private readonly ClassifiedAdApplicationService _applicationService;
+
+        public ClassifiedAdsCommandsApi(ClassifiedAdApplicationService applicationService)
         {
-            //Handle the request here
+            _applicationService = applicationService;
+        }
+
+        [HttpPost]
+        public IActionResult Post(Contracts.ClassifiedAds.V1.Create request)
+        {
+            _applicationService.Handle(request);
             return Ok();
         }
     }

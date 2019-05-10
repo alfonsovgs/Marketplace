@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Marketplace.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,10 +27,12 @@ namespace Marketplace
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new ClassifiedAdApplicationService());
+
             services.AddMvc();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info
             {
-                Title = "ClasifiedAds",
+                Title = "ClassifiedAds",
                 Version = "v1"
             }));
         }
@@ -44,7 +47,7 @@ namespace Marketplace
 
             app.UseMvcWithDefaultRoute();
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ClasifiedAds"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ClassifiedAds v1"));
         }
     }
 }
