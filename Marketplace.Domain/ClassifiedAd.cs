@@ -5,7 +5,7 @@ using Marketplace.Framework;
 
 namespace Marketplace.Domain
 {
-    public class ClassifiedAd : Entity
+    public class ClassifiedAd : AggregateRoot<ClassifiedAdId>
     {
         public ClassifiedAdId Id { get; private set; }
         public UserId OwnerId { get; private set; }
@@ -24,38 +24,29 @@ namespace Marketplace.Domain
             });
         }
 
-        public void SetTitle(ClassifiedAdTitle title)
-        {
+        public void SetTitle(ClassifiedAdTitle title) =>
             Apply(new Events.ClassifiedAdTitleChanged
             {
                 Id = Id,
                 Title = title
             });
-        }
 
-        public void UpdateText(ClassifiedAdText text)
-        {
+        public void UpdateText(ClassifiedAdText text) =>
             Apply(new Events.ClassifiedAdTextUpdated
             {
                 Id = Id,
                 AdText = text
             });
-        }
 
-        public void UpdatePrice(Price price)
-        {
+        public void UpdatePrice(Price price) =>
             Apply(new Events.ClassifiedAdPriceUpdated
             {
                 Id = Id,
                 Price = Price.Amount,
                 CurrencyCode = Price.Currency.CurrencyCode,
             });
-        }
 
-        public void RequestToPublish()
-        {
-            Apply(new Events.ClassidiedAdSentForReview { Id = Id});
-        }
+        public void RequestToPublish() => Apply(new Events.ClassidiedAdSentForReview { Id = Id});
 
         protected override void When(object @event)
         {
