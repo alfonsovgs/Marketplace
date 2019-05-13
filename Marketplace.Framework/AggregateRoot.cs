@@ -5,10 +5,12 @@ using System.Text;
 
 namespace Marketplace.Framework
 {
-    public abstract class AggregateRoot<TId> where TId : Value<TId>
+    public abstract class AggregateRoot<TId> : IInternalEventHandler where TId : Value<TId>
     {
         public TId Id { get; protected set; }
         private readonly List<object> _changes;
+
+        protected AggregateRoot() => _changes = new List<object>();
 
         protected abstract void When(object @event);
         protected abstract void EnsureValidState();
@@ -24,5 +26,8 @@ namespace Marketplace.Framework
 
         public void ClearChanges() => _changes.Clear();
 
+        protected void ApplyToEntity(IInternalEventHandler entity, object @event) => entity?.Handle(@event);
+
+        public void Handle(object @event) => When(@event);
     }
 }

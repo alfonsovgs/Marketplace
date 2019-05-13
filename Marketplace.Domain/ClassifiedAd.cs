@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Marketplace.Framework;
 
@@ -7,16 +8,17 @@ namespace Marketplace.Domain
 {
     public class ClassifiedAd : AggregateRoot<ClassifiedAdId>
     {
-        public ClassifiedAdId Id { get; private set; }
         public UserId OwnerId { get; private set; }
         public ClassifiedAdTitle Title { get; private set; }
         public ClassifiedAdText Text { get; private set; }
         public Price Price { get; private set; }
         public ClassifiedAdState State { get; private set; }
         public UserId ApprovedBy { get; private set; }
+        public List<Picture> Pictures { get; private set; }
 
         public ClassifiedAd(ClassifiedAdId id, UserId ownerId)
         {
+            Pictures = new List<Picture>();
             Apply(new Events.ClassifiedAdCreated
             {
                 Id = id,
@@ -46,6 +48,15 @@ namespace Marketplace.Domain
                 CurrencyCode = Price.Currency.CurrencyCode,
             });
 
+        public void AddPicture(Uri pictureUri, PictureSize size) => Apply(new Events.PictureAddedToAClassifiedAd
+        {
+            PictureId = new Guid(),
+            ClassifiedAdId = Id,
+            Url = pictureUri.ToString(),
+            Height = size.Height,
+            Width = size.Width,
+        });
+ 
         public void RequestToPublish() => Apply(new Events.ClassidiedAdSentForReview { Id = Id});
 
         protected override void When(object @event)
@@ -68,6 +79,11 @@ namespace Marketplace.Domain
                     break;
                 case Events.ClassidiedAdSentForReview e:
                     State = ClassifiedAdState.PendingReview;
+                    break;
+                case Events.PictureAddedToAClassifiedAd e:
+                    var picture = new Picture(Apply);
+                    ApplyToEntity(picture, e);
+                    Pictures.Add(picture);
                     break;
             }
         }
