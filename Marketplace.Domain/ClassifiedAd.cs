@@ -55,9 +55,21 @@ namespace Marketplace.Domain
             Url = pictureUri.ToString(),
             Height = size.Height,
             Width = size.Width,
+            Order = Pictures.Max(x => x.Order),
         });
  
         public void RequestToPublish() => Apply(new Events.ClassidiedAdSentForReview { Id = Id});
+
+        public void ResizePicture(PictureId pictureId, PictureSize newSize)
+        {
+            var picture = FindPicture(pictureId);
+            if (picture == null) throw new InvalidOperationException("Cannot resize a picture thar I don't have");
+            picture.Resize(newSize);
+        }
+
+        private Picture FindPicture(PictureId id) => Pictures.FirstOrDefault(x => x.Id == id);
+
+        private Picture FirstPicture => Pictures.OrderBy(x => x.Order).FirstOrDefault();
 
         protected override void When(object @event)
         {
@@ -98,11 +110,13 @@ namespace Marketplace.Domain
                     ClassifiedAdState.PendingReview =>
                     Title != null
                     && Text != null
-                    && Price?.Amount > 0,
+                    && Price?.Amount > 0
+                    && FirstPicture.HasCorrectSize(),
                     ClassifiedAdState.Active =>
                     Title != null
                     && Text != null
                     && Price?.Amount > 0
+                    && FirstPicture.HasCorrectSize()
                     && ApprovedBy != null,
                     _ => true
                     });

@@ -28,6 +28,6 @@ namespace Marketplace.Framework
 
         protected void ApplyToEntity(IInternalEventHandler entity, object @event) => entity?.Handle(@event);
 
-        public void Handle(object @event) => When(@event);
+        void IInternalEventHandler.Handle(object @event) => When(@event);
     }
 }

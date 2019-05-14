@@ -20,6 +20,6 @@ namespace Marketplace.Framework
             _applier(@event);
         }
 
-        public void Handle(object @event) => When(@event);
+        void IInternalEventHandler.Handle(object @event) => When(@event);
     }
 }

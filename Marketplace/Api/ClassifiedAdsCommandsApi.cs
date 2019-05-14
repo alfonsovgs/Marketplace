@@ -11,9 +11,9 @@ namespace Marketplace.Api
     [Route("/ad")]
     public class ClassifiedAdsCommandsApi : Controller
     {
-        private readonly ClassifiedAdApplicationService _applicationService;
+        private readonly ClassifiedAdsApplicationService _applicationService;
 
-        public ClassifiedAdsCommandsApi(ClassifiedAdApplicationService applicationService)
+        public ClassifiedAdsCommandsApi(ClassifiedAdsApplicationService applicationService)
         {
             _applicationService = applicationService;
         }
