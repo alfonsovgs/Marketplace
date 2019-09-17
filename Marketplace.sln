@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace", "Marketplace\Marketplace.csproj", "{05AE76E7-D72E-462F-B121-EEDD9D4B8D04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace", "Marketplace\Marketplace.csproj", "{05AE76E7-D72E-462F-B121-EEDD9D4B8D04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Domain", "Marketplace.Domain\Marketplace.Domain.csproj", "{AB2C98E7-B4BE-4704-B327-7996DA207F43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Domain", "Marketplace.Domain\Marketplace.Domain.csproj", "{AB2C98E7-B4BE-4704-B327-7996DA207F43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Tests", "Marketplace.Tests\Marketplace.Tests.csproj", "{82CFFFBC-7079-4B55-A504-774855C6DA9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Tests", "Marketplace.Tests\Marketplace.Tests.csproj", "{82CFFFBC-7079-4B55-A504-774855C6DA9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Framework", "Marketplace.Framework\Marketplace.Framework.csproj", "{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketplace.Framework", "Marketplace.Framework\Marketplace.Framework.csproj", "{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Marketplace.Infrastructure", "Marketplace.Infrastructure\Marketplace.Infrastructure.csproj", "{25300D2C-3AD1-485B-81F5-50DB8DD187B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3768E2A-03C6-4204-86FB-75FC7DC69EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25300D2C-3AD1-485B-81F5-50DB8DD187B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25300D2C-3AD1-485B-81F5-50DB8DD187B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25300D2C-3AD1-485B-81F5-50DB8DD187B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25300D2C-3AD1-485B-81F5-50DB8DD187B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

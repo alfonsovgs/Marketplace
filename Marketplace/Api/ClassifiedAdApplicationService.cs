@@ -8,13 +8,13 @@ namespace Marketplace.Api
 {
     public class ClassifiedAdsApplicationService : IApplicationService
     {
-        private readonly IClassifiedAdRepository _store;
+        private readonly IClassifiedAdRepository _repository;
         private readonly ICurrencyLookup _currencyLookup;
 
-        public ClassifiedAdsApplicationService(IClassifiedAdRepository store, ICurrencyLookup currencyLookup
+        public ClassifiedAdsApplicationService(IClassifiedAdRepository repository, ICurrencyLookup currencyLookup
         )
         {
-            _store = store;
+            _repository = repository;
             _currencyLookup = currencyLookup;
         }
 
@@ -58,7 +58,7 @@ namespace Marketplace.Api
 
         private async Task HandleCreate(V1.Create cmd)
         {
-            if (await _store.Exists(new ClassifiedAdId(cmd.Id)))
+            if (await _repository.Exists(new ClassifiedAdId(cmd.Id)))
                 throw new InvalidOperationException($"Entity with id {cmd.Id} already exists");
 
             var classifiedAd = new ClassifiedAd(
@@ -66,19 +66,19 @@ namespace Marketplace.Api
                 new UserId(cmd.OwnerId)
             );
 
-            await _store.Add(classifiedAd);
+            await _repository.Add(classifiedAd);
         }
 
         private async Task HandleUpdate(Guid classifiedAdId, Action<ClassifiedAd> operation)
         {
-            var classifiedAd = await _store.Load(new ClassifiedAdId(classifiedAdId));
+            var classifiedAd = await _repository.Load(new ClassifiedAdId(classifiedAdId));
             
             if (classifiedAd == null)
                 throw new InvalidOperationException($"Entity with id {classifiedAdId} cannot be found");
 
             operation(classifiedAd);
 
-            await _store.Add(classifiedAd);
+            await _repository.Add(classifiedAd);
         }
     }
 }
