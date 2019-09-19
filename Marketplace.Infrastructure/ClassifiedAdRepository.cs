@@ -2,7 +2,6 @@
 using Raven.Client.Documents.Session;
 using System;
 using System.Threading.Tasks;
-using Marketplace.Framework;
 
 namespace Marketplace.Infrastructure
 {
@@ -23,14 +22,5 @@ namespace Marketplace.Infrastructure
 
         private static string EntityId(ClassifiedAdId id)
             => $"ClassifiedAd/{id}";
-    }
-
-    public class RavenDbUnitOfWork : IUnitOfWork
-    {
-        private readonly IAsyncDocumentSession _session;
-
-        public RavenDbUnitOfWork(IAsyncDocumentSession session) => _session = session;
-
-        public async Task Commit() => await _session.SaveChangesAsync();
     }
 }
