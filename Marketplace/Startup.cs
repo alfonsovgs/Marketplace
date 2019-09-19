@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Marketplace.Api;
+using Marketplace.Domain;
+using Marketplace.Framework;
+using Marketplace.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Raven.Client.Documents;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Marketplace
@@ -28,6 +32,22 @@ namespace Marketplace
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddSingleton(new ClassifiedAdApplicationService());
+            var store = new DocumentStore
+            {
+                Urls = new[] { "http://localhost:8080" },
+                Database = "Marketplace_Chapter8",
+                Conventions =
+                {
+                    FindIdentityProperty = m => m.Name == "_databaseId"
+                }
+            };
+            store.Initialize();
+
+            //services.AddSingleton<ICurrencyLookup, FixedCurrencyLookup>();
+            services.AddScoped(c => store.OpenAsyncSession());
+            services.AddScoped<IUnitOfWork, RavenDbUnitOfWork>();
+            services.AddScoped<IClassifiedAdRepository, ClassifiedAdRepository>();
+            services.AddScoped<ClassifiedAdsApplicationService>();
 
             services.AddMvc();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info
