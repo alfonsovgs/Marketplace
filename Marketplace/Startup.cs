@@ -43,7 +43,7 @@ namespace Marketplace
             };
             store.Initialize();
 
-            //services.AddSingleton<ICurrencyLookup, FixedCurrencyLookup>();
+            services.AddSingleton<ICurrencyLookup, FixedCurrencyLookup>();
             services.AddScoped(c => store.OpenAsyncSession());
             services.AddScoped<IUnitOfWork, RavenDbUnitOfWork>();
             services.AddScoped<IClassifiedAdRepository, ClassifiedAdRepository>();
